@@ -65,9 +65,14 @@ d3.csv("data/revenues.csv").then(data => {
     .data(data)
   
   rects.enter().append("rect")
-    .attr("y", d => y(d.revenue))
+    .attr("y", d => y(0))
     .attr("x", (d) => x(d.month))
     .attr("width", x.bandwidth)
+    .attr("height", d => HEIGHT - y(0))
+    .attr("fill", "grey")
+    .transition()
+    .duration(750)
+    .attr("y", d => y(d.revenue))
     .attr("height", d => HEIGHT - y(d.revenue))
     .attr("fill", "grey")
 
