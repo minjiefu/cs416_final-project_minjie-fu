@@ -45,7 +45,7 @@ d3.csv("data/menus.csv").then(data => {
     .paddingOuter(0.2)
   
   const y = d3.scaleLinear()
-    .domain([0, 2600])
+    .domain([0, 1000])
     .range([HEIGHT-150, 0])
 
   const xAxisCall = d3.axisBottom(x)
@@ -60,7 +60,7 @@ d3.csv("data/menus.csv").then(data => {
       .attr("transform", "rotate(-40)")
 
   const yAxisCall = d3.axisLeft(y)
-    .ticks(26)
+    .ticks(10)
     .tickFormat(d => d)
 
   g.append("g")
