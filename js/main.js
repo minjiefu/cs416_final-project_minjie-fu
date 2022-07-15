@@ -91,12 +91,12 @@ d3.csv("data/revenues.csv").then(data => {
     
     rects.enter().append("text")
     
-    .attr("x", (d) => x(d.month)+20)
+    .attr("x", (d) => x(d.month)+x.bandwidth()/2-8)
         .attr("y",  d => HEIGHT)
             .attr("height", 0)
                 .transition()
                 .duration(750)
-        .text( d.revenue)
+        .text( d => d.revenue)
         .attr("y",  d => y(d.revenue)+0.1 )
         .attr("dy", "-.7em"); 
     
