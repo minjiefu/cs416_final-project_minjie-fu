@@ -89,6 +89,8 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("width", x.bandwidth)
     .attr("height", d => HEIGHT - y(0))
     .attr("fill", "grey")
+    .on("mousemove", function(d){tip.html(d.revenue).style("top", d3.select(this).attr("cx") +"px").style("left",d3.select(this).attr("cy")+"px")})
+    .on("mouseout", function(){tip.style("visibility", "hidden")})
     
     .transition()
     .duration(750)
@@ -96,7 +98,6 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("height", d => HEIGHT - y(d.revenue))
     .attr("fill", "grey")
     //.on("mouseover", function(d) {return tip.text(d.revenue).style("visibility", "visible").style("top", y(d.revenue) - 13+ 'px' ).style("left", x(d.month) + x.bandwidth() - 12 + 'px')})
-    .on("mousemove", function(d){tip.html(d.revenue).style("top", d3.select(this).attr("cx") +"px").style("left",d3.select(this).attr("cy")+"px")})
-    .on("mouseout", function(){tip.style("visibility", "hidden")})
+    
 
   })
