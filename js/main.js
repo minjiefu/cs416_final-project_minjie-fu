@@ -90,18 +90,14 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("height", d => HEIGHT - y(d.revenue))
     
     rects.enter().append("text")
-    .style("display",  d => { return d.revenue === null ? "none" : null; })
-        .attr("x", ( d => { return x(d.month) + (x.bandwidth / 2) -8 ; }))
-            .style("fill",  d => { 
-                return d.value === d3.max(dataset,  d => { return d.revenue; }) 
-                ? highlightColor : greyColor
-                })
-        .attr("y",  d => { return HEIGHT; })
+    
+    .attr("x", (d) => x(d.month))
+        .attr("y",  d => HEIGHT)
             .attr("height", 0)
                 .transition()
                 .duration(750)
-        .text( d => { return d.revenue; })
-        .attr("y",  d => { return y(d.revenue) + .1; })
+        .text( "hello")
+        .attr("y",  d => y(d.revenue)+0.1 )
         .attr("dy", "-.7em"); 
     
 
