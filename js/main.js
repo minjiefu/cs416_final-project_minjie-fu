@@ -2,12 +2,26 @@ const MARGIN = { LEFT: 120, RIGHT: 10, TOP: 100, BOTTOM: 100 }
 const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT
 const HEIGHT = 800 - MARGIN.TOP - MARGIN.BOTTOM
 
+var tip = d3.select("#chart-area")
+	.append("div")
+  .attr("class", "tip")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden");
+
 const svg = d3.select("#chart-area").append("svg")
   .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
   .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
 
 const g = svg.append("g")
   .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
+// Title
+svg.append("text")
+   .attr("x", WIDTH / 2)
+   .attr("y", 50)
+   .attr("text-anchor", "middle")
+   .style("font-size", "20px")
+   .text("Awesome Barchart");
 
 // X label
 g.append("text")
@@ -75,6 +89,7 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("y", d => y(d.revenue))
     .attr("height", d => HEIGHT - y(d.revenue))
     .attr("fill", "grey")
-
+    .on("mouseover", function(d) {return tip.text(d.revenue).style("visibility", "visible").style("top", y(d.revenue) - 13+ 'px' ).style("left", x(d.month) + x.bandwidth() - 12 + 'px')})
+    .on("mouseout", function(){return tip.style("visibility", "hidden");});
 
 })
