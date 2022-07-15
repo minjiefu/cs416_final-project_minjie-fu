@@ -1,13 +1,13 @@
-"name","counts"
-"Coffee","8484"
-"Tea","4769"
-"Celery","4690"
-"Olives","4553"
-"Radishes","3346"
-"Mashed Potatoes","2670"
-"Milk","2290"
-"Boiled Potatoes","2129"
-"Fruit","2006"
-"Chicken Salad","1879"
-"Vanilla Ice Cream","1853"
-"Cocoa","1704"
+name,counts
+Coffee,8484
+Tea,4769
+Celery,4690
+Olives,4553
+Radishes,3346
+Mashed Potatoes,2670
+Milk,2290
+Boiled Potatoes,2129
+Fruit,2006
+Chicken Salad,1879
+Vanilla Ice Cream,1853
+Cocoa,1704

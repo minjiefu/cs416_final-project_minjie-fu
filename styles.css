@@ -26,6 +26,9 @@
   
 }
 
+.line-chart    {        
+  border: 1px solid lightgray;    
+}
 
 .float-child1 {
   float: left;
