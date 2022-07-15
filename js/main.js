@@ -74,7 +74,7 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("y", d => y(0))
     .attr("x", (d) => x(d.name))
     .attr("width", x.bandwidth)
-    .attr("height", d => HEIGHT - y(0))
+    .attr("height", d => HEIGHT-150 - y(0))
     .attr("fill", "grey")
     .transition()
     .duration(750)
