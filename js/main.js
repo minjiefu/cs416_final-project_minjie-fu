@@ -79,7 +79,7 @@ d3.csv("data/revenues.csv").then(data => {
     .transition()
     .duration(750)
     .attr("y", d => y(d.counts))
-    .attr("height", d => HEIGHT - y(d.counts))
+    .attr("height", d => HEIGHT - 150- y(d.counts))
     
     rects.enter().append("text")
     
