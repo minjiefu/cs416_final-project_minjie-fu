@@ -21,6 +21,7 @@ svg.append("text")
    .attr("y", 50)
    .attr("text-anchor", "middle")
    .style("font-size", "20px")
+   .style("font-weight", "bold")
    .text("Which restaurants have the most menus collected in this dataset?");
 
 // X label
@@ -46,7 +47,7 @@ d3.csv("data/revenues.csv").then(data => {
   data.forEach(d => {
     d.revenue = Number(d.revenue)
   })
-})
+
 
   const x = d3.scaleBand()
     .domain(data.map(d => d.month))
@@ -94,3 +95,5 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("fill", "grey")
     .on("mouseover", function(d) {return tip.text(d.revenue).style("visibility", "visible").style("top", y(d.revenue) - 13+ 'px' ).style("left", x(d.month) + x.bandwidth() - 12 + 'px')})
     .on("mouseout", function(){return tip.style("visibility", "hidden")})
+
+  })
