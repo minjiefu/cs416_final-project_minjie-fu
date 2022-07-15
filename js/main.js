@@ -21,14 +21,6 @@ svg.append("text")
    .style("font-weight", "bold")
    .text("Which restaurants have the most menus collected in this dataset?");
 
-// X label
-g.append("text")
-  .attr("class", "x axis-label")
-  .attr("x", WIDTH / 2)
-  .attr("y", HEIGHT + 60)
-  .attr("font-size", "20px")
-  .attr("text-anchor", "middle")
-  //.text("Month")
 
 // Y label
 g.append("text")
@@ -59,7 +51,7 @@ d3.csv("data/revenues.csv").then(data => {
   const xAxisCall = d3.axisBottom(x)
   g.append("g")
     .attr("class", "x axis")
-    .attr("transform", `translate(0, ${HEIGHT})`)
+    .attr("transform", `translate(0, 450)`)
     .call(xAxisCall)
     .selectAll("text")
       .attr("y", "10")
