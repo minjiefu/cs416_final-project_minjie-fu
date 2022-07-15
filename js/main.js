@@ -10,15 +10,6 @@ const svg = d3.select("#chart-area").append("svg")
 const g = svg.append("g")
   .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
-var tooltip = d3.select("#chart-area").append("div").attr('class', 'toolTip')
-.style('position', 'absolute')
-.style('z-index', '10')
-.style('visibility', 'hidden')
-.style('padding', '10px')
-.style('background', 'rgba(0,0,0,0.6)')
-.style('border-radius', '4px')
-.style('color', '#fff')
-.text('a simple tooltip');
 
 
 // Title
@@ -93,19 +84,25 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("width", x.bandwidth)
     .attr("height", d => HEIGHT - y(0))
     .attr("fill", "grey")
-    .on("mousemove", function(d){
-      tooltip.style("opacity",1)
-      .style("left",(d3.event.pageX)+"px")
-      .style("top",(d3.event.pageY)+"px")
-      .html("item="+ d.revenue);
-    })
-    .on("mouseout", function(){tip.style("opacity",0)})
-
     .transition()
     .duration(750)
     .attr("y", d => y(d.revenue))
     .attr("height", d => HEIGHT - y(d.revenue))
-    .attr("fill", "grey")
+    
+    rects.enter().append("text")
+    .style("display",  d => { return d.revenue === null ? "none" : null; })
+        .attr("x", ( d => { return x(d.month) + (x.bandwidth / 2) -8 ; }))
+            .style("fill",  d => { 
+                return d.value === d3.max(dataset,  d => { return d.revenue; }) 
+                ? highlightColor : greyColor
+                })
+        .attr("y",  d => { return HEIGHT; })
+            .attr("height", 0)
+                .transition()
+                .duration(750)
+        .text( d => { return d.revenue; })
+        .attr("y",  d => { return y(d.revenue) + .1; })
+        .attr("dy", "-.7em"); 
     
 
   })
