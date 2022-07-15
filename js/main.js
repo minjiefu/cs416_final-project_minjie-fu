@@ -32,7 +32,7 @@ g.append("text")
   .attr("transform", "rotate(-90)")
   .text("Counts")
 
-d3.csv("data/revenues.csv").then(data => {
+d3.csv("data/restaurants.csv").then(data => {
   data.forEach(d => {
     d.counts = Number(d.counts)
   })
