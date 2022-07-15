@@ -17,10 +17,10 @@ const g = svg.append("g")
   .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 // Title
 svg.append("text")
-   .attr("x", WIDTH / 2 + 60)
+   .attr("x", WIDTH / 2 + 115)
    .attr("y", 50)
    .attr("text-anchor", "middle")
-   .style("font-size", "20px")
+   .style("font-size", "25px")
    .style("font-weight", "bold")
    .text("Which restaurants have the most menus collected in this dataset?");
 
@@ -93,7 +93,8 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("y", d => y(d.revenue))
     .attr("height", d => HEIGHT - y(d.revenue))
     .attr("fill", "grey")
-    .on("mouseover", function(d) {return tip.text(d.revenue).style("visibility", "visible").style("top", y(d.revenue) - 13+ 'px' ).style("left", x(d.month) + x.bandwidth() - 12 + 'px')})
-    .on("mouseout", function(){return tip.style("visibility", "hidden")})
+    //.on("mouseover", function(d) {return tip.text(d.revenue).style("visibility", "visible").style("top", y(d.revenue) - 13+ 'px' ).style("left", x(d.month) + x.bandwidth() - 12 + 'px')})
+    .on("mousemove", function(d){tip.html(d.revenue).style("top", (d3.event.pageY)+"px").style("left",(d3.event.pageX)+"px")})
+    .on("mouseout", function(){tip.style("visibility", "hidden")})
 
   })
