@@ -2,12 +2,7 @@ const MARGIN = { LEFT: 120, RIGHT: 10, TOP: 100, BOTTOM: 100 }
 const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT
 const HEIGHT = 800 - MARGIN.TOP - MARGIN.BOTTOM
 
-var tip = d3.select("#chart-area")
-	.append("div")
-  .attr("class", "tip")
-	.style("position", "absolute")
-	.style("z-index", "10")
-	.style("visibility", "hidden");
+
 
 const svg = d3.select("#chart-area").append("svg")
   .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
@@ -15,6 +10,13 @@ const svg = d3.select("#chart-area").append("svg")
 
 const g = svg.append("g")
   .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
+
+  var tip = d3.select("#chart-area")
+	.append("div")
+  .attr("class", "tip")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden");
 // Title
 svg.append("text")
    .attr("x", WIDTH / 2 + 115)
@@ -94,7 +96,7 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("height", d => HEIGHT - y(d.revenue))
     .attr("fill", "grey")
     //.on("mouseover", function(d) {return tip.text(d.revenue).style("visibility", "visible").style("top", y(d.revenue) - 13+ 'px' ).style("left", x(d.month) + x.bandwidth() - 12 + 'px')})
-    .on("mousemove", function(d){tip.html(d.revenue).style("top", (d3.event.pageY)+"px").style("left",(d3.event.pageX)+"px")})
+    .on("mousemove", function(d){tip.html(d.revenue).style("top", d3.select(this).attr("cx") +"px").style("left",d3.select(this).attr("cy")+"px")})
     .on("mouseout", function(){tip.style("visibility", "hidden")})
 
   })
