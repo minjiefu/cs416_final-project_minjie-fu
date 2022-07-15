@@ -17,11 +17,11 @@ const g = svg.append("g")
   .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 // Title
 svg.append("text")
-   .attr("x", WIDTH / 2)
+   .attr("x", WIDTH / 2 + 60)
    .attr("y", 50)
    .attr("text-anchor", "middle")
    .style("font-size", "20px")
-   .text("Awesome Barchart");
+   .text("Which restaurants have the most menus collected in this dataset?");
 
 // X label
 g.append("text")
@@ -46,6 +46,7 @@ d3.csv("data/revenues.csv").then(data => {
   data.forEach(d => {
     d.revenue = Number(d.revenue)
   })
+})
 
   const x = d3.scaleBand()
     .domain(data.map(d => d.month))
@@ -71,6 +72,7 @@ d3.csv("data/revenues.csv").then(data => {
   const yAxisCall = d3.axisLeft(y)
     .ticks(3)
     .tickFormat(d => d + "m")
+
   g.append("g")
     .attr("class", "y axis")
     .call(yAxisCall)
@@ -84,12 +86,11 @@ d3.csv("data/revenues.csv").then(data => {
     .attr("width", x.bandwidth)
     .attr("height", d => HEIGHT - y(0))
     .attr("fill", "grey")
+    
     .transition()
     .duration(750)
     .attr("y", d => y(d.revenue))
     .attr("height", d => HEIGHT - y(d.revenue))
     .attr("fill", "grey")
     .on("mouseover", function(d) {return tip.text(d.revenue).style("visibility", "visible").style("top", y(d.revenue) - 13+ 'px' ).style("left", x(d.month) + x.bandwidth() - 12 + 'px')})
-    .on("mouseout", function(){return tip.style("visibility", "hidden");});
-
-})
+    .on("mouseout", function(){return tip.style("visibility", "hidden")})
