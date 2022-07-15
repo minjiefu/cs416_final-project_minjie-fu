@@ -19,7 +19,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("Which dishes are most frequently appeared on the collected menus?");
+   .text("Which dishes are most frequently appeared on the menus?");
 
 
 // Y label
@@ -45,7 +45,7 @@ d3.csv("data/dishes.csv").then(data => {
     .paddingOuter(0.2)
   
   const y = d3.scaleLinear()
-    .domain([0, 600])
+    .domain([0, 9000])
     .range([HEIGHT-150, 0])
 
   const xAxisCall = d3.axisBottom(x)
