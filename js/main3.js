@@ -39,7 +39,7 @@ d3.csv("data/menus.csv").then(data => {
 
 
   const x = d3.scaleBand()
-    .domain(data.map(d => d.year))
+    .domain(d3.extent(data, function(d) { return d.year; }))
     .range([0, WIDTH])
     .paddingInner(0.3)
     .paddingOuter(0.2)
@@ -49,8 +49,8 @@ d3.csv("data/menus.csv").then(data => {
     .range([HEIGHT-150, 0])
 
   const xAxisCall = d3.axisBottom(x)
-  .ticks(10)
-    .tickFormat(d => d)
+  .ticks(d3.max(data, d => d.year)-d3.min(data, d => d.year))
+    
 
   g.append("g")
     .attr("class", "x axis")
@@ -83,9 +83,10 @@ d3.csv("data/menus.csv").then(data => {
  .attr("stroke-width", 1.5)
  .attr("d", line)
  .transition()
- .duration(1000)
- .ease("linear")
- .attr("stroke-dashoffset", 0)
+ .ease(d3.easeSin)
+ .duration(2500)
+ 
+ 
   
 
   })
