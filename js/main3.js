@@ -19,7 +19,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("How old are the collected menus?");
+   .text("How old are the collected menus??");
 
 
 // Y label
@@ -33,13 +33,13 @@ g.append("text")
   .text("Counts")
 
 
-  d3.csv("data/menus.csv").then(data => {
+  d3.csv("data/menus2.csv").then(data => {
     data.forEach(d => {
       d.counts = Number(d.counts)
     })
   
 
-    const x = d3.scaleTime()
+    const x = d3.scaleBand()
     .domain(data.map(d => d.year))
     .range([0, WIDTH])
     .paddingInner(0.3)
@@ -50,7 +50,7 @@ g.append("text")
     .range([HEIGHT-150, 0])
 
     const xAxisCall = d3.axisBottom(x)
-    .ticks(10)
+   
     
     
 
