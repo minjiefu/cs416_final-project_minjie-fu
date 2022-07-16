@@ -86,6 +86,8 @@ g.append("text")
  .attr("stroke-linecap", "round")
  .attr("stroke-width", 2.5)
  .attr("d", line)
+ .transition()
+ .duration(2500)
  
  
  
