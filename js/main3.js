@@ -100,8 +100,8 @@ g.append("text")
   const annotations = [
     {
       note: {
-        label: "Here is the annotation label",
-        title: "Annotation title"
+        label: "70% of the menus in collections are dated within this period",
+        title: "1898-1907 Peak"
       },
       type: d3.annotationCalloutCircle,
     subject: {
