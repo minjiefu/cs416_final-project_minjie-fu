@@ -92,26 +92,28 @@ d3.csv("data/restaurants.csv").then(data => {
         .attr("y",  d => y(d.counts)+0.1 )
         .attr("dy", "-.7em"); 
     
+        const annotations = [
+          {
+            note: {
+              label: "Here is the annotation label",
+              title: "Annotation title"
+            },
+           
+          color: ["red"],
+          x: 36,
+          y: 45,
+          dy: 100,
+          dx: 100
+          }
+        ]
+        
+        // Add annotation to the chart
+        const makeAnnotations = d3.annotation()
+          .annotations(annotations)
+        g.call(makeAnnotations)
+
 
   })
 
 
-  const annotations = [
-    {
-      note: {
-        label: "Here is the annotation label",
-        title: "Annotation title"
-      },
-     
-    color: ["red"],
-    x: 36,
-    y: 45,
-    dy: 100,
-    dx: 100
-    }
-  ]
   
-  // Add annotation to the chart
-  const makeAnnotations = d3.annotation()
-    .annotations(annotations)
-  g.call(makeAnnotations)
