@@ -49,6 +49,9 @@ d3.csv("data/menus.csv").then(data => {
     .range([HEIGHT-150, 0])
 
   const xAxisCall = d3.axisBottom(x)
+  .ticks(10)
+    .tickFormat(d => d)
+    
   g.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0, 450)")
