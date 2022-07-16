@@ -50,6 +50,7 @@ g.append("text")
     .range([HEIGHT-150, 0])
 
     const xAxisCall = d3.axisBottom(x)
+    .ticks(10)
     
     
 
@@ -83,8 +84,7 @@ g.append("text")
  .attr("stroke-linecap", "round")
  .attr("stroke-width", 1.5)
  .attr("d", line)
- .transition()
- .duration(5000)
+ 
  
  
  
