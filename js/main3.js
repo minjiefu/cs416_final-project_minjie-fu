@@ -19,7 +19,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("How old are the collected menus?");
+   .text("How old are the collected menus");
 
 
 // Y label
@@ -95,3 +95,22 @@ g.append("text")
   
 
   });
+
+
+  const annotations = [
+    {
+      note: {
+        label: "Here is the annotation label",
+        title: "Annotation title"
+      },
+      x: 100,
+      y: 100,
+      dy: 100,
+      dx: 100
+    }
+  ]
+  
+  // Add annotation to the chart
+  const makeAnnotations = d3.annotation()
+    .annotations(annotations)
+  g.call(makeAnnotations)
