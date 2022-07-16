@@ -10,7 +10,29 @@ const svg = d3.select("#chart-area").append("svg")
 const g = svg.append("g")
   .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
-
+  const annotations = [
+    {
+      note: {
+        label: "Here is the annotation label",
+        title: "Annotation title",
+        align: "middle",  // try right or left
+        wrap: 200,  // try something smaller to see text split in several lines
+        padding: 10   // More = text lower
+      },
+      color: ["#69b3a2"],
+      x: 100,
+      y: 100,
+      dy: 100,
+      dx: 100
+    }
+  ]
+  
+  // Add annotation to the chart
+  const makeAnnotations = d3.annotation()
+    .annotations(annotations)
+  g.call(makeAnnotations)
+  
+  
 // Title
 svg.append("text")
    .attr("x", WIDTH / 2 + 130)
