@@ -40,7 +40,7 @@ g.append("text")
   
 
     const x = d3.scaleBand()
-    .domain(data.map(d => d.year))
+    .domain([1851,1998])
     .range([0, WIDTH])
     .paddingInner(0.3)
     .paddingOuter(0.2)
@@ -51,6 +51,7 @@ g.append("text")
 
     const xAxisCall = d3.axisBottom(x)
     .ticks(10)
+    .tickFormat(d => d)
     
     
 
