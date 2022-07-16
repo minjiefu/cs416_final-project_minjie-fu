@@ -36,11 +36,11 @@ g.append("text")
   d3.csv("data/menus.csv").then(data => {
     data.forEach(d => {
       d.counts = Number(d.counts)
-      d.year = Number(d.year)
+      
     })
   
 
-    const x = d3.scaleLinear()
+    const x = d3.scaleBand()
     .domain(data.map(d => d.year))
     .range([0, WIDTH])
     .paddingInner(0.3)
@@ -51,6 +51,7 @@ g.append("text")
     .range([HEIGHT-150, 0])
 
     const xAxisCall = d3.axisBottom(x)
+    .tickValues(x.domain().filter(function(d,i){ return !(i%10)}));
    
     
     
