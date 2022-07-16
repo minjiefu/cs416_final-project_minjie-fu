@@ -19,7 +19,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("How old are the collected menus??");
+   .text("How old are the collected menus???");
 
 
 // Y label
@@ -83,8 +83,7 @@ d3.csv("data/menus.csv").then(data => {
  .attr("stroke-linecap", "round")
  .attr("stroke-width", 1.5)
  .attr("d", line)
- .transition()
- .duration(2500)
+ 
  
  
   
