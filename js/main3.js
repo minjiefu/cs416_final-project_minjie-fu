@@ -105,7 +105,7 @@ g.append("text")
       },
       type: d3.annotationCalloutCircle,
     subject: {
-      radius: 40,         // circle radius
+      radius: 60,         // circle radius
       radiusPadding: 0   // white space around circle befor connector
     },
     color: ["red"],
