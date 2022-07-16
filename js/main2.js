@@ -7,7 +7,7 @@ const svg = d3.select("#chart-area").append("svg")
   .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
   .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
 
-const g = svg.append("g")
+const g = svg
   .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
   const annotations = [
@@ -20,7 +20,7 @@ const g = svg.append("g")
     color: ["red"],
     x: 30,
     y: 30,
-    dy: 100,
+    dy: 30,
     dx: 100
     }
   ]
@@ -37,7 +37,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("Which dishes are most frequently appeared on the menus?");
+   .text("Which dishes are most frequently appeared on the menus??");
 
 
 // Y label
