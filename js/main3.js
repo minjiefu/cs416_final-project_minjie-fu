@@ -81,7 +81,11 @@ d3.csv("data/menus.csv").then(data => {
  .attr("stroke-linejoin", "round")
  .attr("stroke-linecap", "round")
  .attr("stroke-width", 1.5)
- .attr("d", line);
+ .attr("d", line)
+ .transition()
+ .duration(1000)
+ .ease("linear")
+ .attr("stroke-dashoffset", 0)
   
 
   })
