@@ -49,7 +49,7 @@ d3.csv("data/menus.csv").then(data => {
     .range([HEIGHT-150, 0])
 
   const xAxisCall = d3.axisBottom(x)
-  .ticks(d3.max(data, d => d.year)-d3.min(data, d => d.year))
+  .ticks(10)
     
 
   g.append("g")
@@ -83,7 +83,6 @@ d3.csv("data/menus.csv").then(data => {
  .attr("stroke-width", 1.5)
  .attr("d", line)
  .transition()
- .ease(d3.easeSin)
  .duration(2500)
  
  
