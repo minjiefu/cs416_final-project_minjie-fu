@@ -17,7 +17,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("Which dishes are most frequently appeared on the menus??");
+   .text("Which dishes are most frequently appeared on the menus?");
 
 
 // Y label
