@@ -19,7 +19,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("How old are the collected menus");
+   .text("How old are the collected menus?");
 
 
 // Y label
@@ -103,10 +103,16 @@ g.append("text")
         label: "Here is the annotation label",
         title: "Annotation title"
       },
-      x: 100,
-      y: 100,
-      dy: 100,
-      dx: 100
+      type: d3.annotationCalloutCircle,
+    subject: {
+      radius: 40,         // circle radius
+      radiusPadding: 0   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: 228,
+    y: 100,
+    dy: 100,
+    dx: 100
     }
   ]
   
