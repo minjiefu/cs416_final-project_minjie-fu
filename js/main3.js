@@ -38,8 +38,8 @@ d3.csv("data/menus.csv").then(data => {
   })
 
 
-  const x = d3.scaleBand()
-    .domain(d3.extent(data, function(d) { return d.year; }))
+  const x = d3.scaleLinear()
+    .domain(d3.extent(data, d => d.year))
     .range([0, WIDTH])
     .paddingInner(0.3)
     .paddingOuter(0.2)
