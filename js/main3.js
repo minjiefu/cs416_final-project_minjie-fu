@@ -33,13 +33,14 @@ g.append("text")
   .text("Counts")
 
 
-  d3.csv("data/menus2.csv").then(data => {
+  d3.csv("data/menus.csv").then(data => {
     data.forEach(d => {
       d.counts = Number(d.counts)
+      d.year = Number(d.year)
     })
   
 
-    const x = d3.scaleBand()
+    const x = d3.scaleLinear()
     .domain(data.map(d => d.year))
     .range([0, WIDTH])
     .paddingInner(0.3)
@@ -90,4 +91,4 @@ g.append("text")
  
   
 
-  })
+  });
