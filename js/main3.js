@@ -35,6 +35,7 @@ g.append("text")
 d3.csv("data/menus.csv").then(data => {
   data.forEach(d => {
     d.counts = Number(d.counts)
+    d.year = Number(d.year)
   })
 
 
