@@ -19,7 +19,7 @@ svg.append("text")
    .attr("text-anchor", "middle")
    .style("font-size", "25px")
    .style("font-weight", "bold")
-   .text("Which dishes are most frequently appeared on the menus?");
+   .text("How old are the menus collected?");
 
 
 // Y label
@@ -51,7 +51,7 @@ d3.csv("data/menus.csv").then(data => {
   const xAxisCall = d3.axisBottom(x)
   .ticks(10)
     .tickFormat(d => d)
-    
+
   g.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0, 450)")
