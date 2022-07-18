@@ -2,6 +2,7 @@ const MARGIN = { LEFT: 120, RIGHT: 10, TOP: 100, BOTTOM: 100 }
 const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT
 const HEIGHT = 800 - MARGIN.TOP - MARGIN.BOTTOM
 
+let flag = true
 
 const svg = d3.select("#chart-area").append("svg")
   .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
@@ -28,39 +29,48 @@ g.append("text")
   .attr("font-size", "20px")
   .attr("text-anchor", "middle")
   .attr("transform", "rotate(-90)")
-  .text("Counts")
+
+const x = d3.scaleBand()
+  .range([0, WIDTH])
+  .paddingInner(0.3)
+  .paddingOuter(0.2)
+
+const y = d3.scaleLinear()
+  .range([HEIGHT-150, 0])
+
+  const xAxisGroup = g.append("g")
+  .attr("class", "x axis")
+  .attr("transform", `translate(0, 450)`)
+
+const yAxisGroup = g.append("g")
+  .attr("class", "y axis")
 
 d3.csv("data/dishes.csv").then(data => {
   data.forEach(d => {
     d.times = Number(d.times)
     d.price = Number(d.price)
   })
-  const allGroup = ["times", "price"]
 
-  d3.select("#selectButton")
-      .selectAll('myOptions')
-     	.data(allGroup)
-      .enter()
-    	.append('option')
-      .text(function (d) { return d; }) // text showed in the menu
-      .attr("value", function (d) { return d; }) // corresponding value returned by the button
+  d3.interval(() => {
+    flag = !flag
+    const newData = flag ? data : data.slice(1)
+    update(newData)
+  }, 1000)
+
+  update(data)
+})
+
+function update(data) {
+  const value = flag ? "times" : "price"
+  const t = d3.transition().duration(750)
+
+  x.domain(data.map(d => d.name))
+  y.domain([0, d3.max(data, d => d[value])])
 
 
-  const x = d3.scaleBand()
-    .domain(data.map(d => d.name))
-    .range([0, WIDTH])
-    .paddingInner(0.3)
-    .paddingOuter(0.2)
-  
-  const y = d3.scaleLinear()
-    .domain([0, 9000])
-    .range([HEIGHT-150, 0])
 
   const xAxisCall = d3.axisBottom(x)
-  g.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0, 450)")
-    .call(xAxisCall)
+  xAxisGroup.transition(t).call(xAxisCall)
     .selectAll("text")
       .attr("y", "10")
       .attr("x", "-5")
@@ -70,59 +80,37 @@ d3.csv("data/dishes.csv").then(data => {
   const yAxisCall = d3.axisLeft(y)
     .ticks(10)
     .tickFormat(d => d)
+    yAxisGroup.transition(t).call(yAxisCall)
 
-  g.append("g")
-    .attr("class", "y axis")
-    .call(yAxisCall)
-
+  // JOIN new data with old elements.
   const rects = g.selectAll("rect")
-    .data(data)
-  
-  rects.enter().append("rect")
-    .attr("y", d => y(d.times))
-    .attr("x", (d) => x(d.name))
-    .attr("width", x.bandwidth)
-    .attr("height", d => (HEIGHT - 150 - y(d.times)))
-    .attr("fill", "grey")
-    
-  
-    
-    rects.enter().append("text")
-    
-    .attr("x", (d) => x(d.name)+x.bandwidth()/2-11)
-        .attr("y",  d => HEIGHT)
-            .attr("height", 0)
-                .transition()
-                .duration(750)
-        .text( d => d.counts)
-        .attr("y",  d => y(d.counts)+0.1 )
-        .attr("dy", "-.7em"); 
-    
-    function update(selectedGroup) {
-      const dataFilter = data.map(function(d){return {name: d.name, value:d[selectedGroup]} })
+    .data(data, d => d.name)
 
-      
+  // EXIT old elements not present in new data.
+  rects.exit()
+    .attr("fill", "red")
+    .transition(t)
+      .attr("height", 0)
+      .attr("y", y(0))
+      .remove()
+
       rects.enter().append("rect")
-    .attr("y", d => y(d.times))
-    .attr("x", (d) => x(d.name))
-    .attr("width", x.bandwidth)
-    .attr("height", d => (HEIGHT - 150 - y(d.times)))
-    .attr("fill", "grey")
-          .datum(dataFilter)
-          .transition()
-          .duration(1000)
-          .attr("y", d => y(d.price))
-    .attr("x", (d) => x(d.name))
-    .attr("width", x.bandwidth)
-    .attr("height", d => (HEIGHT - 150 - y(d.price)))
-          
-    }   
+      .attr("fill", "grey")
+      .attr("y", y(0))
+      .attr("height", 0)
+      .merge(rects)
+    .transition(t)
+      .attr("x", (d) => x(d.name))
+      .attr("width", x.bandwidth)
+      .attr("y", d => y(d[value]))
+      .attr("height", d => HEIGHT-150 - y(d[value]))
+  
+      const text = flag ? "Times_Appeared" : "Average_Price ($)"
+      yLabel.text(text)
+    
+  
+    
+   
+   
 
-    d3.select("#selectButton").on("change", function(event,d) {
-      // recover the option that has been chosen
-      const selectedOption = d3.select(this).property("value")
-      // run the updateChart function with this selected option
-      update(selectedOption)
-    })
-
-  })
+  }
