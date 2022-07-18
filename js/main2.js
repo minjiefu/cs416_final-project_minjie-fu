@@ -52,11 +52,11 @@ d3.csv("data/revenues.csv").then(data => {
   })
   d3.interval(() => {
     flag = !flag
-    const newData = flag ? data : data.slice(1)
-    update(newData)
+    
+    update(data)
   }, 1000)
 
-  update(data)
+ 
 })
   
 function update(data) {
@@ -64,7 +64,13 @@ function update(data) {
   const t = d3.transition().duration(1500)
 
   x.domain(data.map(d => d.month))
-  y.domain([0, d3.max(data, d => d[value])])
+  y.domain([0, d3.max(data, function(d){
+    if (value === "profit"){
+      return 9000
+    }else{
+      return 50
+    }
+  })])
 
   const xAxisCall = d3.axisBottom(x)
   xAxisGroup.transition(t).call(xAxisCall)
@@ -75,7 +81,7 @@ function update(data) {
       .attr("transform", "rotate(-40)")
 
   const yAxisCall = d3.axisLeft(y)
-    .ticks(10)
+    .ticks(3)
     .tickFormat(d => d)
   yAxisGroup.transition(t).call(yAxisCall)
 
@@ -104,21 +110,11 @@ function update(data) {
       .attr("y", d => y(d[value]))
       .attr("height", d => (HEIGHT-150 - y(d[value])))
 
-      rects.enter().append("text")
-      .attr("x", (d) => x(d.month)+x.bandwidth()/2-11)
-      .attr("y", y(0))
-      .attr("height", 0)
-      // AND UPDATE old elements present in new data.
-      .merge(rects)
-      .transition(t)
-      .text( d => dd[value])
-      .attr("y",  d => yd[value]+0.1 )
-      .attr("dy", "-.7em"); 
+     
 
   const text = flag ? "Profit ($)" : "Revenue ($)"
   yLabel.text(text)
 
-  rects.enter().append("text")
-    
+  
    
 }
