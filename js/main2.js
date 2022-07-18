@@ -24,7 +24,7 @@ svg.append("text")
 // Y label
 g.append("text")
   .attr("class", "y axis-label")
-  .attr("x", - 200)
+  .attr("x", - ((HEIGHT-150) / 2))
   .attr("y", -60)
   .attr("font-size", "20px")
   .attr("text-anchor", "middle")
@@ -70,7 +70,7 @@ function update(data) {
 
 
   const xAxisCall = d3.axisBottom(x)
-  xAxisGroup.transition(t).call(xAxisCall)
+  xAxisGroup.transition().call(xAxisCall)
     .selectAll("text")
       .attr("y", "10")
       .attr("x", "-5")
@@ -80,7 +80,7 @@ function update(data) {
   const yAxisCall = d3.axisLeft(y)
     .ticks(10)
     .tickFormat(d => d)
-    yAxisGroup.transition(t).call(yAxisCall)
+    yAxisGroup.transition().call(yAxisCall)
 
   // JOIN new data with old elements.
   const rects = g.selectAll("rect")
@@ -94,12 +94,15 @@ function update(data) {
       .attr("y", y(0))
       .remove()
 
-      rects.enter().append("rect")
+    rects.enter().append("rect")
       .attr("fill", "grey")
-      .attr("y", y(0))
-      .attr("height", 0)
+      .attr("y", d => y(0))
+      .attr("x", (d) => x(d.name))
+      .attr("width", x.bandwidth)
+    .attr("height", d => (HEIGHT - 150 - y(0)))
       .merge(rects)
-    .transition(t)
+    .transition()
+    .duration(750)
       .attr("x", (d) => x(d.name))
       .attr("width", x.bandwidth)
       .attr("y", d => y(d[value]))
@@ -108,9 +111,5 @@ function update(data) {
       const text = flag ? "Times_Appeared" : "Average_Price ($)"
       yLabel.text(text)
     
-  
-    
-   
-   
 
   }
