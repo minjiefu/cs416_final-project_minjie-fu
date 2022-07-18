@@ -1,11 +1,13 @@
-"name","counts"
-"Waldorf Astoria","565"
-"Healy's 42nd St. Grill","218"
-"Hotel Astor","148"
-"The Biltmore","96"
-"Hotel McAlpin","62"
-"Delmonico's","59"
-"Pennsylvania Railroad","56"
-"Childs","52"
-"The Mouquin Restaurant and Wine","50"
-"Adams' Restaurant","44"
+month,revenue,profit
+Coffee,8484,15
+Tea,4769,12.5
+Celery,4690,25
+Olives,4553,17
+Radishes,3346,12.5
+Mashed Potatoes,2670,7.5
+Milk,2290,22.5
+Boiled Potatoes,2129,10
+Fruit,2006,20
+Chicken Salad,1879,50
+Vanilla Ice Cream,1853,15
+Cocoa,1704,12.5

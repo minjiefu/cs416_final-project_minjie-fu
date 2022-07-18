@@ -1,13 +1,13 @@
-name,counts
-Coffee,8484
-Tea,4769
-Celery,4690
-Olives,4553
-Radishes,3346
-Mashed Potatoes,2670
-Milk,2290
-Boiled Potatoes,2129
-Fruit,2006
-Chicken Salad,1879
-Vanilla Ice Cream,1853
-Cocoa,1704
+name,times,price
+Coffee,8484,15
+Tea,4769,12.5
+Celery,4690,25
+Olives,4553,17
+Radishes,3346,12.5
+Mashed Potatoes,2670,7.5
+Milk,2290,22.5
+Boiled Potatoes,2129,10
+Fruit,2006,20
+Chicken Salad,1879,50
+Vanilla Ice Cream,1853,15
+Cocoa,1704,12.5
