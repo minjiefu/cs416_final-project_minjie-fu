@@ -32,8 +32,18 @@ g.append("text")
 
 d3.csv("data/dishes.csv").then(data => {
   data.forEach(d => {
-    d.counts = Number(d.counts)
+    d.times = Number(d.times)
+    d.price = Number(d.price)
   })
+  const allGroup = ["times", "price"]
+
+  d3.select("#selectButton")
+      .selectAll('myOptions')
+     	.data(allGroup)
+      .enter()
+    	.append('option')
+      .text(function (d) { return d; }) // text showed in the menu
+      .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
 
   const x = d3.scaleBand()
@@ -69,15 +79,13 @@ d3.csv("data/dishes.csv").then(data => {
     .data(data)
   
   rects.enter().append("rect")
-    .attr("y", d => y(0))
+    .attr("y", d => y(d.times))
     .attr("x", (d) => x(d.name))
     .attr("width", x.bandwidth)
-    .attr("height", d => (HEIGHT - 150 - y(0)))
+    .attr("height", d => (HEIGHT - 150 - y(d.times)))
     .attr("fill", "grey")
-    .transition()
-    .duration(750)
-    .attr("y", d => y(d.counts))
-    .attr("height", d => HEIGHT - 150- y(d.counts))
+    
+  
     
     rects.enter().append("text")
     
@@ -90,7 +98,31 @@ d3.csv("data/dishes.csv").then(data => {
         .attr("y",  d => y(d.counts)+0.1 )
         .attr("dy", "-.7em"); 
     
+    function update(selectedGroup) {
+      const dataFilter = data.map(function(d){return {name: d.name, value:d[selectedGroup]} })
+
+      
+      rects.enter().append("rect")
+    .attr("y", d => y(d.times))
+    .attr("x", (d) => x(d.name))
+    .attr("width", x.bandwidth)
+    .attr("height", d => (HEIGHT - 150 - y(d.times)))
+    .attr("fill", "grey")
+          .datum(dataFilter)
+          .transition()
+          .duration(1000)
+          .attr("y", d => y(d.price))
+    .attr("x", (d) => x(d.name))
+    .attr("width", x.bandwidth)
+    .attr("height", d => (HEIGHT - 150 - y(d.price)))
+          
+    }   
+
+    d3.select("#selectButton").on("change", function(event,d) {
+      // recover the option that has been chosen
+      const selectedOption = d3.select(this).property("value")
+      // run the updateChart function with this selected option
+      update(selectedOption)
+    })
 
   })
-
-  
