@@ -66,7 +66,7 @@ d3.csv("data/restaurants.csv").then(data => {
     .attr("class", "y axis")
     .call(yAxisCall)
 
-  const rects = g.selectAll("rect")
+  const rects = g.selectAll(null)
     .data(data)
   
   rects.enter().append("rect")
@@ -97,4 +97,27 @@ d3.csv("data/restaurants.csv").then(data => {
   })
 
 
+  const annotations = [
+    {
+      note: {
+        label: "a luxury hotel in Midtown Manhattan in New York City, has the most menus in collection. ",
+        title: "Waldort Astoria (1893-1929)"
+      },
+      connector: {
+        end: "dot",        // Can be none, or arrow or dot
+        type: "line",      // ?? don't know what it does
+        lineType : "vertical",    // ?? don't know what it does
+        endScale: 10     // dot size
+      },
+    color: ["red"],
+    x: 48,
+    y: 60,
+    dy: 50,
+    dx: 100
+    }
+  ]
   
+  // Add annotation to the chart
+  const makeAnnotations = d3.annotation()
+    .annotations(annotations)
+  g.call(makeAnnotations)
